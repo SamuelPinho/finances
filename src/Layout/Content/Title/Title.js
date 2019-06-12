@@ -4,9 +4,7 @@ class Title extends Component {
   render() {
     return (
       <Fragment>
-        <h1 className="title has-text-grey-darker">
-          Quanto você tem de dinheiro?
-        </h1>
+        <h1 className="title has-text-grey-darker">Cadastre-se</h1>
       </Fragment>
     );
   }
