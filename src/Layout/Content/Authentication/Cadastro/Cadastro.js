@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   primeiroNome: '',
   email: '',
   senha: '',
-  erro: ''
+  erro: '',
+  sucesso: ''
 };
 
 class Cadastro extends Component {
@@ -35,7 +36,10 @@ class Cadastro extends Component {
         });
       })
       .then(() => {
-        this.setState({ ...INITIAL_STATE });
+        this.setState({
+          ...INITIAL_STATE,
+          sucesso: 'Você foi cadastrado com sucesso'
+        });
       })
       .catch(erro => {
         this.setState({ erro });
@@ -43,7 +47,7 @@ class Cadastro extends Component {
   };
 
   render() {
-    const { primeiroNome, email, senha, erro } = this.state;
+    const { primeiroNome, email, senha, erro, sucesso } = this.state;
 
     // passar essa lógica para o redux
     const isDisabled = primeiroNome === '' || email === '' || senha === '';
@@ -98,6 +102,7 @@ class Cadastro extends Component {
                 Cadastre-se
               </button>
             </div>
+            <p className="help is-success">{sucesso}</p>
           </div>
         </form>
       </Fragment>

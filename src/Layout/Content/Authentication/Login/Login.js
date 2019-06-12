@@ -4,7 +4,8 @@ import { withFirebase } from 'Services/Firebase';
 const INITIAL_STATE = {
   email: '',
   senha: '',
-  erro: ''
+  erro: '',
+  sucesso: ''
 };
 
 class Cadastro extends Component {
@@ -27,7 +28,10 @@ class Cadastro extends Component {
     this.props.firebase
       .doSignInWithEmailAndPassword(email, senha)
       .then(() => {
-        this.setState({ ...INITIAL_STATE });
+        this.setState({
+          ...INITIAL_STATE,
+          sucesso: 'Você logou com sucesso!'
+        });
       })
       .catch(erro => {
         if (erro.code === 'auth/wrong-password') {
@@ -38,7 +42,7 @@ class Cadastro extends Component {
   };
 
   render() {
-    const { email, senha, erro } = this.state;
+    const { email, senha, erro, sucesso } = this.state;
 
     // passar essa lógica para o redux
     const isDisabled = email === '' || senha === '';
@@ -77,6 +81,7 @@ class Cadastro extends Component {
                 Login
               </button>
             </div>
+            <p className="help is-success">{sucesso}</p>
           </div>
         </form>
       </Fragment>
