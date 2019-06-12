@@ -1,13 +1,17 @@
 import React, { Component, Fragment } from 'react';
+import { withFirebase } from 'Services/Firebase';
+
+const INITIAL_STATE = {
+  email: '',
+  senha: '',
+  erro: ''
+};
 
 class Cadastro extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      email: '',
-      senha: ''
-    };
+    this.state = { ...INITIAL_STATE };
   }
 
   handleChange = event => {
@@ -17,44 +21,67 @@ class Cadastro extends Component {
   };
 
   handleSubmit = event => {
-    // colocar a lógica de logar o usuário ao firebase
+    event.preventDefault();
+    const { email, senha } = this.state;
+
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, senha)
+      .then(() => {
+        this.setState({ ...INITIAL_STATE });
+      })
+      .catch(erro => {
+        if (erro.code === 'auth/wrong-password') {
+          erro.message = 'O e-mail ou a senha digitados estão incorretos.';
+        }
+        this.setState({ erro: erro.message });
+      });
   };
 
   render() {
-    const { email, senha } = this.state;
+    const { email, senha, erro } = this.state;
 
     // passar essa lógica para o redux
     const isDisabled = email === '' || senha === '';
 
     return (
       <Fragment>
-        <div className="field">
-          <label className="label">E-Mail</label>
-          <div className="control">
-            <input
-              className="input column is-5"
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
+        <form onSubmit={this.handleSubmit}>
+          <div className="field">
+            <label className="label">E-Mail</label>
+            <div className="control">
+              <input
+                className="input column is-5"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </div>
-        <div className="field">
-          <label className="label">Senha</label>
-          <div className="control">
-            <input
-              className="input column is-5"
-              type="password"
-              name="senha"
-              value={senha}
-              onChange={this.handleChange}
-            />
+          <div className="field">
+            <label className="label">Senha</label>
+            <div className="control">
+              <input
+                className="input column is-5"
+                type="password"
+                name="senha"
+                value={senha}
+                onChange={this.handleChange}
+              />
+            </div>
+            <p className="help is-danger">{erro}</p>
           </div>
-        </div>
+          <div className="field">
+            <div className="control">
+              <button className="button is-success" disabled={isDisabled}>
+                Login
+              </button>
+            </div>
+          </div>
+        </form>
       </Fragment>
     );
   }
 }
 
-export default Cadastro;
+export default withFirebase(Cadastro);

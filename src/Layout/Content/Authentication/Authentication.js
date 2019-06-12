@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
-// import Cadastro from './Cadastro/Cadastro';
-// import Login from './Login/Login';
+import Cadastro from './Cadastro/Cadastro';
+import Login from './Login/Login';
 
 class Authentication extends Component {
   render() {
     return (
       <Fragment>
         {/* <Cadastro /> */}
-        {/* <Login /> */}
+        <Login />
       </Fragment>
     );
   }

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import Firebase, { FirebaseContext } from 'Services/Firebase';
 import './styles/theme.scss';
 import Layout from './Layout/Layout';
 
 class App extends Component {
   render() {
-    return <Layout />;
+    return (
+      <FirebaseContext.Provider value={new Firebase()}>
+        <Layout />
+      </FirebaseContext.Provider>
+    );
   }
 }
 

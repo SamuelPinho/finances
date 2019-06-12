@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import Questions from './Questions/Questions';
+import { withAuthentication } from 'Services/Session';
+// import Questions from './Questions/Questions';
 import Title from './Title/Title';
 import Authentication from './Authentication/Authentication';
 
@@ -9,12 +10,12 @@ class Content extends Component {
       <Fragment>
         <div className="box">
           <Title />
-          <Questions />
-          {/* <Authentication /> */}
+          {/* <Questions /> */}
+          <Authentication />
         </div>
       </Fragment>
     );
   }
 }
 
-export default Content;
+export default withAuthentication(Content);
