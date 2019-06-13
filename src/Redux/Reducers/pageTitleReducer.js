@@ -1,3 +1,5 @@
+import { SET_TITLE } from '../Types/pageTitle';
+
 const INITIAL_STATE = {
   title: ''
 };
@@ -7,9 +9,9 @@ const applySetTitle = (state, action) => ({
   title: action.title
 });
 
-function titleReducer(state = INITIAL_STATE, action) {
+function pageTitleReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'SET_TITLE': {
+    case SET_TITLE: {
       return applySetTitle(state, action);
     }
     default:
@@ -17,4 +19,4 @@ function titleReducer(state = INITIAL_STATE, action) {
   }
 }
 
-export default titleReducer;
+export default pageTitleReducer;

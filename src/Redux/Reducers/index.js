@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import titleReducer from './title';
-import sessionReducer from './session';
+import pageTitleReducer from './pageTitleReducer';
+import sessionReducer from './sessionReducer';
 
 const rootReducer = combineReducers({
-  titleState: titleReducer,
+  pageTitleState: pageTitleReducer,
   sessionState: sessionReducer
 });
 

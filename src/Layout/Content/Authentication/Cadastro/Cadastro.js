@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
+import { pageTitleActions } from 'Redux/Actions';
 
 const INITIAL_STATE = {
   primeiroNome: '',
@@ -117,7 +118,7 @@ class Cadastro extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setPageTitle: title => dispatch({ type: 'SET_TITLE', title })
+  setPageTitle: title => dispatch(pageTitleActions.setPageTitle(title))
 });
 
 export default compose(

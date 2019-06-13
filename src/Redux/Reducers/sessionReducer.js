@@ -1,3 +1,5 @@
+import { SET_AUTH_USER } from 'Redux/Types/session';
+
 const INITIAL_STATE = {
   authUser: null
 };
@@ -9,7 +11,7 @@ const applySetAuthUser = (state, action) => ({
 
 function sessionReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'SET_AUTH_USER': {
+    case SET_AUTH_USER: {
       return applySetAuthUser(state, action);
     }
     default:

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { pageTitleActions } from 'Redux/Actions';
 
 class Home extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class Home extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setPageTitle: title => dispatch({ type: 'SET_TITLE', title })
+  setPageTitle: title => dispatch(pageTitleActions.setPageTitle(title))
 });
 
 export default connect(
