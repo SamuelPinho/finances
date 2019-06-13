@@ -1,0 +1,121 @@
+{
+  "sharedComponents": {
+    "actionButtons": {
+      "": "index.js"
+    }
+  },
+  "layout": {
+    "": "index.js",
+    "navbar": {
+      "": "index.js",
+      "searchBar": {
+        "": "index.js"
+      },
+      "authenticationButtons": {
+        "loginButton": {
+          "": "index.js"
+        },
+        "registerButton": {
+          "": "index.js"
+        },
+        "userButton": {
+          "": "index.js"
+        }
+      }
+    },
+    "content": {
+      "": "index.js",
+      "pageTitle": {
+        "": "index.js"
+      },
+      "operationsList": {
+        "": "index.js",
+        "sharedTitle": "Import pageTitle",
+        "sharedAction": "Import actionButtons from sharedComponents",
+        "table": {
+          "": "index.js",
+          "header": {
+            "": "index.js"
+          },
+          "actionButtons": {
+            "": "index.js"
+          }
+        }
+      },
+      "addOperation": {
+        "": "index.js",
+        "sharedTitle": "Import pageTitle",
+        "form": {
+          "": "index.js"
+        },
+        "sharedAction": "Import actionButtons from sharedComponents"
+      },
+      "quiz": {
+        "": "index.js",
+        "sharedTitle": "Import pageTitle",
+        "sharedAction": "Import actionButtons from sharedComponents",
+        "question": {
+          "": "index.js",
+          "questionText": {
+            "": "index.js"
+          },
+          "questionInput": {
+            "": "index.js"
+          }
+        },
+        "applicationsDivider": {
+          "": "index.js"
+        },
+        "monthlyGainDivider": {
+          "": "index.js"
+        }
+      }
+    },
+    "footer": {
+      "": "index.js",
+      "shared": "Import actionButtons from sharedComponents"
+    }
+  },
+  "firebase": {
+    "users": {
+      "profileInformation": {
+        "name": "",
+        "email": ""
+      },
+      "financialInformation": {
+        "monthIncome": "",
+        "applications": {
+          "totalValue": "",
+          "categories": [
+            {
+              "name": "",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "operations": {
+        "totalIncome": "",
+        "totalOutcome": "",
+        "totalInvest": "",
+        "operationsList": [
+          {
+            "name": "",
+            "date": "",
+            "type": "",
+            "value": "",
+            "verified": "",
+            "description": ""
+          }
+        ]
+      }
+    }
+  },
+  "routes": {
+    "homePage": "/",
+    "login": "/login",
+    "cadastro": "/cadastro",
+    "cadastroPerguntas": "/cadastro/pergunta/:number",
+    "listar-operacoes": "/listar-operacoes"
+  }
+}
