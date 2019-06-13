@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
 
 const INITIAL_STATE = {
@@ -13,6 +15,10 @@ class Cadastro extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+  }
+
+  componentDidMount() {
+    this.props.setPageTitle('Login');
   }
 
   handleChange = event => {
@@ -89,4 +95,14 @@ class Cadastro extends Component {
   }
 }
 
-export default withFirebase(Cadastro);
+const mapDispatchToProps = dispatch => ({
+  setPageTitle: title => dispatch({ type: 'SET_TITLE', title })
+});
+
+export default compose(
+  withFirebase,
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(Cadastro);

@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 
 class Home extends Component {
+  componentDidMount() {
+    this.props.setPageTitle('Home');
+  }
+
   render() {
     return (
       <Fragment>
@@ -10,4 +15,11 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => ({
+  setPageTitle: title => dispatch({ type: 'SET_TITLE', title })
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);
