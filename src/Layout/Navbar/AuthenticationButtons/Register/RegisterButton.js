@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-class Register extends Component {
+class RegisterButton extends Component {
   render() {
     return (
       <Fragment>
@@ -18,4 +18,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default RegisterButton;

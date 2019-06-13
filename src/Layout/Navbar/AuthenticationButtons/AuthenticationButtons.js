@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Login from './Login/Login';
-import Cadastrar from './Cadastrar/Cadastrar';
+import LoginButton from './Login/LoginButton';
+import RegisterButton from './Register/RegisterButton';
 import User from './User/User';
 
 function Buttons(props) {
@@ -11,8 +11,8 @@ function Buttons(props) {
   } else {
     return (
       <Fragment>
-        <Login />
-        <Cadastrar />
+        <LoginButton />
+        <RegisterButton />
       </Fragment>
     );
   }
