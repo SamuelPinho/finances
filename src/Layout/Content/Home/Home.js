@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withPageTitle } from 'Services/PageTitle';
+import { compose } from 'recompose';
+import { withAuthorization } from 'Services/Session';
 
 class Home extends Component {
   componentDidMount() {
@@ -15,4 +17,7 @@ class Home extends Component {
   }
 }
 
-export default withPageTitle('Home')(Home);
+export default compose(
+  withPageTitle('Home'),
+  withAuthorization()
+)(Home);
