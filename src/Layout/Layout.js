@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Content from './Content/Content';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
+import Notification from './Notification/Notification';
 
 class Layout extends Component {
   render() {
@@ -10,6 +11,7 @@ class Layout extends Component {
         <section className="hero is-link is-fullheight">
           <div className="hero-body">
             <div className="container">
+              <Notification />
               <div className="columns is-centered">
                 <div className="column is-three-fifths">
                   <Navbar />
