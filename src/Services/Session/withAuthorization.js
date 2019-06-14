@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
 import { connect } from 'react-redux';
+import AuthUserContext from './context';
 
 const defaultCondition = authUser => !!authUser;
 
@@ -24,9 +25,13 @@ const withAuthorization = (condition = defaultCondition) => Component => {
     }
 
     render() {
-      return condition(this.props.authUser) ? (
-        <Component {...this.props} />
-      ) : null;
+      return (
+        <AuthUserContext.Consumer>
+          {authUser =>
+            condition(authUser) ? <Component {...this.props} /> : null
+          }
+        </AuthUserContext.Consumer>
+      );
     }
   }
 

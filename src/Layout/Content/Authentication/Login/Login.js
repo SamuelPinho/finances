@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
 import { withPageTitle } from 'Services/PageTitle';
+import { withAuthorization } from 'Services/Session';
+import { throwStatement } from '@babel/types';
 
 const INITIAL_STATE = {
   email: '',
@@ -34,6 +36,7 @@ class Cadastro extends Component {
           ...INITIAL_STATE,
           sucesso: 'Você logou com sucesso!'
         });
+        this.props.history.push('/');
       })
       .catch(erro => {
         if (erro.code === 'auth/wrong-password') {
@@ -91,7 +94,10 @@ class Cadastro extends Component {
   }
 }
 
+const condition = authUser => authUser !== null;
+
 export default compose(
   withFirebase,
+  withAuthorization(condition),
   withPageTitle('Login')
 )(Cadastro);
