@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import Content from './Content/Content';
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
@@ -11,7 +12,13 @@ class Layout extends Component {
         <section className="hero is-link is-fullheight">
           <div className="hero-body">
             <div className="container">
-              <Notification />
+              {this.props.notifications.map((notification, key) => (
+                <Notification
+                  index={key}
+                  notification={notification}
+                  key={key}
+                />
+              ))}
               <div className="columns is-centered">
                 <div className="column is-three-fifths">
                   <Navbar />
@@ -27,4 +34,8 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+const mapStateToProps = state => ({
+  notifications: state.notificationState.notifications
+});
+
+export default connect(mapStateToProps)(Layout);

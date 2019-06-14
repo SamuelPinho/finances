@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import { withFirebase } from 'Services/Firebase';
 import { withPageTitle } from 'Services/PageTitle';
 import { withAuthorization } from 'Services/Session';
-import { throwStatement } from '@babel/types';
+import { notificationActions } from 'Redux/Actions';
 
 const INITIAL_STATE = {
   email: '',
   senha: '',
-  erro: '',
-  sucesso: ''
+  erro: ''
 };
 
 class Cadastro extends Component {
@@ -33,15 +33,26 @@ class Cadastro extends Component {
       .doSignInWithEmailAndPassword(email, senha)
       .then(() => {
         this.setState({
-          ...INITIAL_STATE,
-          sucesso: 'Você logou com sucesso!'
+          ...INITIAL_STATE
         });
+
+        this.props.addNotification({
+          message: 'Você se logou com sucesso!',
+          type: 'success'
+        });
+
         this.props.history.push('/');
       })
       .catch(erro => {
         if (erro.code === 'auth/wrong-password') {
           erro.message = 'O e-mail ou a senha digitados estão incorretos.';
         }
+
+        this.props.addNotification({
+          message: erro.message,
+          type: 'danger'
+        });
+
         this.setState({ erro: erro.message });
       });
   };
@@ -94,10 +105,19 @@ class Cadastro extends Component {
   }
 }
 
-const condition = authUser => authUser !== null;
+const mapDispatchToProps = dispatch => ({
+  addNotification: notification =>
+    dispatch(notificationActions.addNotification(notification))
+});
+
+const condition = authUser => authUser === null;
 
 export default compose(
   withFirebase,
   withAuthorization(condition),
-  withPageTitle('Login')
+  withPageTitle('Login'),
+  connect(
+    null,
+    mapDispatchToProps
+  )
 )(Cadastro);

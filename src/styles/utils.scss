@@ -21,28 +21,3 @@
     transform: translateX(0);
   }
 }
-
-@keyframes fadeout {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes slideout {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  100% {
-    //calc(100% + 1rem) does not work in ie11 //
-    transform: translateX(110%);
-    opacity: 0;
-  }
-}

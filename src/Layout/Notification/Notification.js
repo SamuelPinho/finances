@@ -1,16 +1,34 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { notificationActions } from 'Redux/Actions';
 
 class Notification extends Component {
+  handleClick = event => {
+    event.preventDefault();
+
+    this.props.removeNotification(this.props.index);
+  };
+
   render() {
+    const { notification } = this.props;
+
     return (
       <Fragment>
-        <p className="notification is-success" role="alert">
-          <button class="delete" />
-          Você se logou com sucesso!
+        <p className={'notification is-' + notification.type} role="alert">
+          <button className="delete" onClick={this.handleClick} />
+          {notification.message}
         </p>
       </Fragment>
     );
   }
 }
 
-export default Notification;
+const mapDispatchToProps = dispatch => ({
+  removeNotification: index =>
+    dispatch(notificationActions.removeNotification(index))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Notification);
