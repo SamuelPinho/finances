@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Cadastro from './Cadastro/Cadastro';
+import Register from './Register/Register';
 import Login from './Login/Login';
 
 class Authentication extends Component {
@@ -8,7 +8,7 @@ class Authentication extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route path="/cadastro" component={Cadastro} />
+          <Route path="/cadastro" component={Register} />
           <Route path="/login" component={Login} />
         </Switch>
       </Fragment>

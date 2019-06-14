@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
-import { pageTitleActions } from 'Redux/Actions';
+import { withPageTitle } from 'Services/PageTitle';
 
 const INITIAL_STATE = {
   primeiroNome: '',
@@ -12,15 +11,11 @@ const INITIAL_STATE = {
   sucesso: ''
 };
 
-class Cadastro extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-  }
-
-  componentDidMount() {
-    this.props.setPageTitle('Cadastrar-se');
   }
 
   handleChange = event => {
@@ -36,7 +31,6 @@ class Cadastro extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, senha)
       .then(authUser => {
-        console.log(authUser);
         this.props.firebase.usersCollection.doc(authUser.user.uid).set({
           primeiroNome,
           email
@@ -117,14 +111,7 @@ class Cadastro extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setPageTitle: title => dispatch(pageTitleActions.setPageTitle(title))
-});
-
 export default compose(
   withFirebase,
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(Cadastro);
+  withPageTitle('Cadastrar-se')
+)(Register);

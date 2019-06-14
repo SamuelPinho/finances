@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
-import { pageTitleActions } from 'Redux/Actions';
+import { withPageTitle } from 'Services/PageTitle';
 
 const INITIAL_STATE = {
   email: '',
@@ -16,10 +15,6 @@ class Cadastro extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-  }
-
-  componentDidMount() {
-    this.props.setPageTitle('Login');
   }
 
   handleChange = event => {
@@ -96,14 +91,7 @@ class Cadastro extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setPageTitle: title => dispatch(pageTitleActions.setPageTitle(title))
-});
-
 export default compose(
   withFirebase,
-  connect(
-    null,
-    mapDispatchToProps
-  )
+  withPageTitle('Login')
 )(Cadastro);
