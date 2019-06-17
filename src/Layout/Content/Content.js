@@ -5,6 +5,7 @@ import Questions from './Questions/Questions';
 import Title from './Title/Title';
 import Authentication from './Authentication/Authentication';
 import Home from './Home/Home';
+import Operations from './Operations/Operations';
 
 class Content extends Component {
   render() {
@@ -14,8 +15,9 @@ class Content extends Component {
           <Title />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/" component={Authentication} />
+            <Route path="/operacoes" component={Operations} />
             <Route path="/cadastro/pergunta" component={Questions} />
+            <Route path="/" component={Authentication} />
           </Switch>
         </div>
       </Fragment>

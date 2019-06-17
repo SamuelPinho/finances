@@ -8,8 +8,8 @@ class Authentication extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route path="/cadastro" component={Register} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/cadastro" component={Register} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Fragment>
     );
