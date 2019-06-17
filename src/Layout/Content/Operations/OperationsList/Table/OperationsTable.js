@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { withAuthorization } from 'Services/Session';
+import operationActions from 'Redux/Actions/operationActions';
 
 const INITIAL_STATE = {
   operations: []
@@ -22,22 +25,25 @@ class OperationsTable extends Component {
     this.props.firebase
       .doGetOperations(this.props.authUser.uid)
       .then(operationsSnapshot => {
+        let operations = [];
         operationsSnapshot.forEach(operation => {
           let newOperation = {
             ...operation.data(),
             uid: operation.id
           };
 
-          this.setState({
-            operations: [...this.state.operations, newOperation]
-          });
+          operations = [...operations, newOperation];
+
+          // this.setState({
+          //   operations: [...this.state.operations, newOperation]
+          // });
         });
+
+        this.props.setOperations(operations);
       });
   }
 
   render() {
-    console.log(this.state.operations);
-
     return (
       <Fragment>
         <table className="table is-hoverable is-fullwidth">
@@ -51,7 +57,7 @@ class OperationsTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.operations.map(operation => (
+            {this.props.operations.map(operation => (
               <tr key={operation.uid}>
                 <th>{operation.date}</th>
                 <th>
@@ -62,10 +68,14 @@ class OperationsTable extends Component {
                 <th>{operation.value}</th>
                 <th>{operation.description}</th>
                 <th>
-                  <div class="field">
-                    <div class="control">
-                      <label class="checkbox">
-                        <input type="checkbox" checked={operation.isVerified} />
+                  <div className="field">
+                    <div className="control">
+                      <label className="checkbox">
+                        <input
+                          type="checkbox"
+                          checked={operation.isVerified}
+                          readOnly
+                        />
                       </label>
                     </div>
                   </div>
@@ -79,4 +89,19 @@ class OperationsTable extends Component {
   }
 }
 
-export default withAuthorization()(OperationsTable);
+const mapDispatchToProps = dispatch => ({
+  setOperations: operations =>
+    dispatch(operationActions.setOperations(operations))
+});
+
+const mapStateToProps = state => ({
+  operations: state.operationState.operations
+});
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withAuthorization()
+)(OperationsTable);
