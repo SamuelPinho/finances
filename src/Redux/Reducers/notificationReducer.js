@@ -29,7 +29,6 @@ function notificationReducer(state = INITIAL_STATE, action) {
       return applyAddNotification(state, action);
     }
     case REMOVE_NOTIFICATION: {
-      console.log(applyRemoveNotification(state, action));
       return applyRemoveNotification(state, action);
     }
     default:

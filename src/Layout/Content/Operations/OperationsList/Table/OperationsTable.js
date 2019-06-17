@@ -1,7 +1,43 @@
 import React, { Component, Fragment } from 'react';
+import { withAuthorization } from 'Services/Session';
+
+const INITIAL_STATE = {
+  operations: []
+};
+
+const types = {
+  Pago: 'is-danger',
+  Recebo: 'is-success',
+  Aplico: 'is-link'
+};
 
 class OperationsTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = INITIAL_STATE;
+  }
+
+  componentDidMount() {
+    this.props.firebase
+      .doGetOperations(this.props.authUser.uid)
+      .then(operationsSnapshot => {
+        operationsSnapshot.forEach(operation => {
+          let newOperation = {
+            ...operation.data(),
+            uid: operation.id
+          };
+
+          this.setState({
+            operations: [...this.state.operations, newOperation]
+          });
+        });
+      });
+  }
+
   render() {
+    console.log(this.state.operations);
+
     return (
       <Fragment>
         <table className="table is-narrow is-hoverable is-fullwidth">
@@ -15,13 +51,19 @@ class OperationsTable extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>Sábado 15/06/19</th>
-              <th>Recebo</th>
-              <th>R$ 1171,20</th>
-              <th>40% do Salário</th>
-              <th>[]</th>
-            </tr>
+            {this.state.operations.map(operation => (
+              <tr key={operation.uid}>
+                <th>{operation.date}</th>
+                <th>
+                  <span className={'tag ' + types[operation.type]}>
+                    {operation.type}
+                  </span>
+                </th>
+                <th>{operation.value}</th>
+                <th>{operation.description}</th>
+                <th>{operation.isVerified}</th>
+              </tr>
+            ))}
           </tbody>
         </table>
       </Fragment>
@@ -29,4 +71,4 @@ class OperationsTable extends Component {
   }
 }
 
-export default OperationsTable;
+export default withAuthorization()(OperationsTable);

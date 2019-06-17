@@ -23,6 +23,45 @@ class Firebase {
     this.usersCollection = this.firestore.collection('users');
   }
 
+  // *** OPERATIONS FUNCTIONS ***
+
+  doCreateOperation = (
+    authUserUid,
+    description,
+    value,
+    type,
+    date,
+    isVerified
+  ) => {
+    return new Promise((resolve, reject) => {
+      this.usersCollection
+        .doc(authUserUid)
+        .collection('operations')
+        .add({
+          description,
+          value,
+          type,
+          date,
+          isVerified
+        })
+        .then(resolve())
+        .catch(erro => reject(erro));
+    });
+  };
+
+  doGetOperations = authUserUid => {
+    return new Promise((resolve, reject) => {
+      this.usersCollection
+        .doc(authUserUid)
+        .collection('operations')
+        .get()
+        .then(snapshot => {
+          resolve(snapshot);
+        })
+        .catch(erro => reject(erro));
+    });
+  };
+
   // *** AUTH FUNCTIONS ***
 
   doCreateUserWithEmailAndPassword = (email, password) =>

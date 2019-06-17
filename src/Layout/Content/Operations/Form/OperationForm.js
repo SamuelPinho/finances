@@ -1,13 +1,17 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
 import { withPageTitle } from 'Services/PageTitle';
+import { withAuthorization } from 'Services/Session';
+import { notificationActions } from 'Redux/Actions';
 
 const INITIAL_STATE = {
   descricao: '',
   valor: '',
-  tipo: 'Recebo',
+  tipo: 'Pago',
   data: '',
-  verificado: true
+  isVerificado: false
 };
 
 class OperationForm extends Component {
@@ -30,13 +34,37 @@ class OperationForm extends Component {
   };
 
   handleClick = event => {
+    const { descricao, valor, tipo, data, isVerificado } = this.state;
+    const { authUser, firebase } = this.props;
     event.preventDefault();
 
-    // add logic to add the operation
+    firebase
+      .doCreateOperation(
+        authUser.uid,
+        descricao,
+        valor,
+        tipo,
+        data,
+        isVerificado
+      )
+      .then(() => {
+        this.setState({ ...INITIAL_STATE });
+
+        this.props.addNotification({
+          message: 'Operação cadastrada com sucesso',
+          type: 'success'
+        });
+      })
+      .catch(erro => {
+        this.props.addNotification({
+          message: 'Algo deu errado ao tentar cadastrar a operação',
+          type: 'danger'
+        });
+      });
   };
 
   render() {
-    const { descricao, valor, tipo, data, verificado } = this.state;
+    const { descricao, valor, tipo, data, isVerificado } = this.state;
 
     return (
       <Fragment>
@@ -92,9 +120,9 @@ class OperationForm extends Component {
           <div className="control">
             <label className="checkbox">
               <input
-                name="verificado"
+                name="isVerificado"
                 type="checkbox"
-                checked={verificado}
+                checked={isVerificado}
                 onChange={this.handleCheckChange}
               />
               Verificado
@@ -119,4 +147,16 @@ class OperationForm extends Component {
   }
 }
 
-export default withPageTitle('Adicionar Operação')(OperationForm);
+const mapDispatchToProps = dispatch => ({
+  addNotification: notification =>
+    dispatch(notificationActions.addNotification(notification))
+});
+
+export default compose(
+  withAuthorization(),
+  withPageTitle('Adicionar Operação'),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(OperationForm);
