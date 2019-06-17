@@ -20,7 +20,7 @@ class Layout extends Component {
                 />
               ))}
               <div className="columns is-centered">
-                <div className="column is-three-fifths">
+                <div className="column is-four-fifths">
                   <Navbar />
                   <Content />
                   <Footer />

@@ -40,7 +40,7 @@ class OperationsTable extends Component {
 
     return (
       <Fragment>
-        <table className="table is-narrow is-hoverable is-fullwidth">
+        <table className="table is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th>Data</th>
@@ -61,7 +61,15 @@ class OperationsTable extends Component {
                 </th>
                 <th>{operation.value}</th>
                 <th>{operation.description}</th>
-                <th>{operation.isVerified}</th>
+                <th>
+                  <div class="field">
+                    <div class="control">
+                      <label class="checkbox">
+                        <input type="checkbox" checked={operation.isVerified} />
+                      </label>
+                    </div>
+                  </div>
+                </th>
               </tr>
             ))}
           </tbody>
