@@ -44,6 +44,8 @@ class OperationsTable extends Component {
   }
 
   render() {
+    console.log(this.props.operations);
+
     return (
       <Fragment>
         <table className="table is-hoverable is-fullwidth">
@@ -95,7 +97,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  operations: state.operationState.operations
+  operations: state.operationState.filteredOperations
 });
 
 export default compose(
