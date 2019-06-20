@@ -21,3 +21,18 @@
     transform: translateX(0);
   }
 }
+
+.hero.is-link .tabs a {
+  color: hsl(0, 0%, 29%);
+}
+
+.tabs li.is-active a {
+  border-bottom-color: #3273dc;
+  color: #3273dc !important;
+}
+
+.hero .tabs ul {
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}

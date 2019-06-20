@@ -6,6 +6,7 @@ import Title from './Title/Title';
 import Authentication from './Authentication/Authentication';
 import Home from './Home/Home';
 import Operations from './Operations/Operations';
+import User from './User/User';
 
 class Content extends Component {
   render() {
@@ -17,6 +18,7 @@ class Content extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/operacoes" component={Operations} />
             <Route path="/cadastro/pergunta" component={Questions} />
+            <Route path="/usuario" component={User} />
             <Route path="/" component={Authentication} />
           </Switch>
         </div>
