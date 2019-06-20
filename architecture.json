@@ -25,30 +25,25 @@
     },
     "content": {
       "": "index.js",
+      "user": {
+        "": "index.js",
+        "tabs": { "": "index.js" },
+        "profileInformation": { "": "index.js" },
+        "financialInformation": { "": "index.js" }
+      },
       "pageTitle": {
         "": "index.js"
       },
-      "operationsList": {
+      "operations": {
         "": "index.js",
-        "sharedTitle": "Import pageTitle",
-        "sharedAction": "Import actionButtons from sharedComponents",
-        "table": {
+        "operationsList": {
           "": "index.js",
-          "header": {
-            "": "index.js"
-          },
-          "actionButtons": {
-            "": "index.js"
+          "table": { "": "index.js" },
+          "actionbuttons": {
+            "addNewOperationButton": "index.js"
           }
-        }
-      },
-      "addOperation": {
-        "": "index.js",
-        "sharedTitle": "Import pageTitle",
-        "form": {
-          "": "index.js"
         },
-        "sharedAction": "Import actionButtons from sharedComponents"
+        "operationForm": { "": "index.js" }
       },
       "quiz": {
         "": "index.js",
@@ -115,7 +110,9 @@
     "homePage": "/",
     "login": "/login",
     "cadastro": "/cadastro",
-    "cadastroPerguntas": "/cadastro/pergunta/:number",
-    "listar-operacoes": "/listar-operacoes"
+    "perguntas durante o cadastro": "/cadastro/pergunta/:number",
+    "listar operacoes": "/operacoes",
+    "cadastrar operacoes": "/operacoes/cadastrar",
+    "perfil do usuario": "/usuario/:nome-do-usuario"
   }
 }

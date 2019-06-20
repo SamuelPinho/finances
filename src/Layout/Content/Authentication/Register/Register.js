@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withFirebase } from 'Services/Firebase';
 import { withPageTitle } from 'Services/PageTitle';
+import { notificationActions } from 'Redux/Actions';
 
 const INITIAL_STATE = {
   primeiroNome: '',
@@ -29,21 +31,22 @@ class Register extends Component {
     const { primeiroNome, email, senha } = this.state;
 
     this.props.firebase
-      .doCreateUserWithEmailAndPassword(email, senha)
-      .then(authUser => {
-        this.props.firebase.usersCollection.doc(authUser.user.uid).set({
-          primeiroNome,
-          email
+      .doCreateUser(email, senha, primeiroNome)
+      .then(obj => {
+        this.setState({ ...INITIAL_STATE });
+
+        this.props.addNotification({
+          message: obj.message,
+          type: obj.type
         });
       })
-      .then(() => {
-        this.setState({
-          ...INITIAL_STATE,
-          sucesso: 'Você foi cadastrado com sucesso'
+      .catch(obj => {
+        this.setState({ erro: obj.message });
+
+        this.props.addNotification({
+          message: obj.message,
+          type: obj.type
         });
-      })
-      .catch(erro => {
-        this.setState({ erro });
       });
   };
 
@@ -111,7 +114,16 @@ class Register extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  addNotification: notification =>
+    dispatch(notificationActions.addNotification(notification))
+});
+
 export default compose(
   withFirebase,
-  withPageTitle('Cadastrar-se')
+  withPageTitle('Cadastrar-se'),
+  connect(
+    null,
+    mapDispatchToProps
+  )
 )(Register);

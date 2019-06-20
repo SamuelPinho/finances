@@ -76,6 +76,41 @@ class Firebase {
 
   // password update
 
+  // *** USER FUNCTIONS ***
+
+  doCreateUser = (email, password, firstName) => {
+    let returnMessage = {
+      type: '',
+      message: ''
+    };
+
+    return new Promise((resolve, reject) => {
+      this.doCreateUserWithEmailAndPassword(email, password)
+        .then(authUser => {
+          this.usersCollection.doc(authUser.user.uid).set({
+            profileInformation: {
+              firstName,
+              email
+            }
+          });
+        })
+        .then(() => {
+          returnMessage.type = 'success';
+          returnMessage.message = 'Você foi cadastrado com sucesso';
+
+          resolve(returnMessage);
+        })
+        .catch(erro => {
+          console.log(erro.message);
+          returnMessage.type = 'danger';
+          returnMessage.message =
+            'Algo deu errado ao tentar cadastrar o usuário';
+
+          reject(returnMessage);
+        });
+    });
+  };
+
   // *** MERGE AUTH AND FIRESTORE USER API ***
 
   onAuthUserListener = (next, fallback) =>
