@@ -6,25 +6,25 @@ class User extends Component {
   render() {
     return (
       <Fragment>
-        <div class="dropdown is-hoverable is-right">
-          <div class="dropdown-trigger">
+        <div className="dropdown is-hoverable is-right">
+          <div className="dropdown-trigger">
             <button
-              class="button is-rounded is-light"
+              className="button is-rounded is-light"
               aria-haspopup="true"
               aria-controls="dropdown-menu"
             >
               <span>Samuel Monteiro</span>
             </button>
           </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <Link class="dropdown-item" to="/usuario">
+          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+            <div className="dropdown-content">
+              <Link className="dropdown-item" to="/usuario">
                 Meu Perfil
               </Link>
-              <Link class="dropdown-item" to="/usuario/financeiro">
+              <Link className="dropdown-item" to="/usuario/financeiro">
                 Dados Financeiros
               </Link>
-              <hr class="dropdown-divider" />
+              <hr className="dropdown-divider" />
               <LogoutButton />
             </div>
           </div>

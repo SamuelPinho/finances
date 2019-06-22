@@ -12,7 +12,7 @@ class LogoutButton extends Component {
     return (
       <Fragment>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a class="dropdown-item has-text-danger" onClick={this.handleClick}>
+        <a className="dropdown-item has-text-danger" onClick={this.handleClick}>
           Sair
         </a>
       </Fragment>
