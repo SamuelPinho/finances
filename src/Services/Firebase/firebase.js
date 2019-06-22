@@ -66,6 +66,7 @@ class Firebase {
       this.usersCollection
         .doc(authUserUid)
         .collection('operations')
+        .orderBy('date')
         .get()
         .then(snapshot => {
           resolve(snapshot);
