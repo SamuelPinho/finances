@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Content from './Content/Content';
 import Navbar from './Navbar/Navbar';
-import Footer from './Footer/Footer';
 import Notification from './Notification/Notification';
 
 class Layout extends Component {
@@ -23,7 +22,6 @@ class Layout extends Component {
                 <div className="column is-four-fifths">
                   <Navbar />
                   <Content />
-                  <Footer />
                 </div>
               </div>
             </div>
