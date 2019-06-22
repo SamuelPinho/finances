@@ -1,6 +1,16 @@
 import React, { Component, Fragment } from 'react';
+import { withAuthorization } from 'Services/Session';
 import AuthenticationButtons from './AuthenticationButtons/AuthenticationButtons';
 import SearchBar from './SearchBar/SearchBar';
+import NavigationButtons from './NavigationButtons/NavigationButtons';
+
+function Navigation(props) {
+  if (props.location.pathname === '/operacoes') {
+    return <SearchBar />;
+  } else {
+    return <NavigationButtons />;
+  }
+}
 
 class Navbar extends Component {
   render() {
@@ -8,7 +18,7 @@ class Navbar extends Component {
       <Fragment>
         <div className="level">
           <div className="level-left">
-            <SearchBar />
+            <Navigation location={this.props.location} />
           </div>
           <div className="level-right">
             <AuthenticationButtons />
@@ -19,4 +29,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default withAuthorization()(Navbar);
