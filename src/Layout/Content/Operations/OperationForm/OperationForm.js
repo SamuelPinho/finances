@@ -39,14 +39,7 @@ class OperationForm extends Component {
     event.preventDefault();
 
     firebase
-      .doCreateOperation(
-        authUser.uid,
-        descricao,
-        valor,
-        tipo,
-        data,
-        isVerificado
-      )
+      .doAddOperation(authUser.uid, descricao, valor, tipo, data, isVerificado)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
 

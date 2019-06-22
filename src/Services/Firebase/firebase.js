@@ -12,6 +12,18 @@ const config = {
   appId: '1:190644548458:web:b5193a96235f276b'
 };
 
+const MESSAGE_TYPES = {
+  error: 'danger',
+  success: 'success'
+};
+
+const createReturnMessage = (type, message) => {
+  return {
+    type: type,
+    message: message
+  };
+};
+
 class Firebase {
   constructor() {
     app.initializeApp(config);
@@ -25,7 +37,7 @@ class Firebase {
 
   // *** OPERATIONS FUNCTIONS ***
 
-  doCreateOperation = (
+  doAddOperation = (
     authUserUid,
     description,
     value,
@@ -79,11 +91,6 @@ class Firebase {
   // *** USER FUNCTIONS ***
 
   doCreateUser = (email, password, firstName) => {
-    let returnMessage = {
-      type: '',
-      message: ''
-    };
-
     return new Promise((resolve, reject) => {
       this.doCreateUserWithEmailAndPassword(email, password)
         .then(authUser => {
@@ -95,18 +102,55 @@ class Firebase {
           });
         })
         .then(() => {
-          returnMessage.type = 'success';
-          returnMessage.message = 'Você foi cadastrado com sucesso';
-
-          resolve(returnMessage);
+          resolve(
+            createReturnMessage(
+              MESSAGE_TYPES.success,
+              'Você foi cadastrado com sucesso'
+            )
+          );
         })
         .catch(erro => {
           console.log(erro.message);
-          returnMessage.type = 'danger';
-          returnMessage.message =
-            'Algo deu errado ao tentar cadastrar o usuário';
 
-          reject(returnMessage);
+          reject(
+            createReturnMessage(
+              MESSAGE_TYPES.error,
+              'Algo deu errado ao tentar cadastrar o usuário'
+            )
+          );
+        });
+    });
+  };
+
+  doAddFinancialInformation = (authUserUid, startingMoney) => {
+    return new Promise((resolve, reject) => {
+      this.usersCollection
+        .doc(authUserUid)
+        .set(
+          {
+            financialInformation: {
+              startingMoney: parseFloat(startingMoney.replace(',', '.'))
+            }
+          },
+          { merge: true }
+        )
+        .then(() => {
+          resolve(
+            createReturnMessage(
+              MESSAGE_TYPES.success,
+              'Seu usuário foi atualizado com sucesso'
+            )
+          );
+        })
+        .catch(erro => {
+          console.log(erro);
+
+          reject(
+            createReturnMessage(
+              MESSAGE_TYPES.error,
+              'Algo deu errado ao tentar atualizar seus dados'
+            )
+          );
         });
     });
   };
