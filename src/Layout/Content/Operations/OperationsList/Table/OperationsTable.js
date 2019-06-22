@@ -35,6 +35,8 @@ class OperationsTable extends Component {
             uid: operation.id
           };
 
+          newOperation.date = newOperation.date.toDate().toLocaleDateString();
+
           operations = [...operations, newOperation];
         });
 

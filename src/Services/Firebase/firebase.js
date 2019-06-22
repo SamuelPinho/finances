@@ -53,7 +53,7 @@ class Firebase {
           description,
           value: parseFloat(value.replace(',', '.')),
           type,
-          date,
+          date: new Date(date),
           isVerified
         })
         .then(resolve())
@@ -66,7 +66,8 @@ class Firebase {
       this.usersCollection
         .doc(authUserUid)
         .collection('operations')
-        .orderBy('date')
+        .orderBy('date', 'desc')
+        .limit(20)
         .get()
         .then(snapshot => {
           resolve(snapshot);
