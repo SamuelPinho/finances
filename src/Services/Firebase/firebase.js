@@ -51,7 +51,7 @@ class Firebase {
         .collection('operations')
         .add({
           description,
-          value,
+          value: parseFloat(value.replace(',', '.')),
           type,
           date,
           isVerified

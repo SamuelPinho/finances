@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withAuthorization } from 'Services/Session';
 import operationActions from 'Redux/Actions/operationActions';
+import Finances from 'Services/Business';
 
 const INITIAL_STATE = {
-  operations: []
+  operations: [],
+  dayAmount: 0
 };
 
 const types = {
@@ -19,6 +21,7 @@ class OperationsTable extends Component {
     super(props);
 
     this.state = INITIAL_STATE;
+    this.finances = new Finances();
   }
 
   componentDidMount() {
@@ -33,10 +36,6 @@ class OperationsTable extends Component {
           };
 
           operations = [...operations, newOperation];
-
-          // this.setState({
-          //   operations: [...this.state.operations, newOperation]
-          // });
         });
 
         this.props.setOperations(operations);
