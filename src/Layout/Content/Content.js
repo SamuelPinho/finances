@@ -7,6 +7,7 @@ import Authentication from './Authentication/Authentication';
 import Home from './Home/Home';
 import Operations from './Operations/Operations';
 import User from './User/User';
+import Dashboard from './Dashboard/Dashboard';
 
 class Content extends Component {
   render() {
@@ -19,6 +20,7 @@ class Content extends Component {
             <Route path="/operacoes" component={Operations} />
             <Route path="/cadastro/pergunta" component={Questions} />
             <Route path="/usuario" component={User} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/" component={Authentication} />
           </Switch>
         </div>

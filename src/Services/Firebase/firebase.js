@@ -70,7 +70,64 @@ class Firebase {
         .limit(20)
         .get()
         .then(snapshot => {
-          resolve(snapshot);
+          let operations = [];
+
+          snapshot.forEach(operation => {
+            let newOperation = {
+              ...operation.data(),
+              uid: operation.id
+            };
+
+            newOperation.date = newOperation.date.toDate().toLocaleDateString();
+
+            operations = [...operations, newOperation];
+          });
+
+          resolve(operations);
+        })
+        .catch(erro => reject(erro));
+    });
+  };
+
+  doGetOperationsByDate = (
+    authUserUid,
+    finalDate,
+    initialDate = '30/08/2018'
+  ) => {
+    return new Promise((resolve, reject) => {
+      initialDate = initialDate.split('/');
+      finalDate = finalDate.split('/');
+
+      initialDate = new Date(
+        initialDate[2],
+        initialDate[1] - 1,
+        initialDate[0]
+      );
+
+      finalDate = new Date(finalDate[2], finalDate[1] - 1, finalDate[0]);
+
+      this.usersCollection
+        .doc(authUserUid)
+        .collection('operations')
+        .where('date', '>=', initialDate)
+        .where('date', '<=', finalDate)
+        .orderBy('date', 'desc')
+        .get()
+        .then(snapshot => {
+          let operations = [];
+
+          snapshot.forEach(operation => {
+            let newOperation = {
+              ...operation.data(),
+              uid: operation.id
+            };
+
+            newOperation.date = newOperation.date.toDate().toLocaleDateString();
+
+            operations = [...operations, newOperation];
+          });
+
+          resolve(operations);
         })
         .catch(erro => reject(erro));
     });

@@ -25,23 +25,13 @@ class OperationsTable extends Component {
   }
 
   componentDidMount() {
-    this.props.firebase
-      .doGetOperations(this.props.authUser.uid)
-      .then(operationsSnapshot => {
-        let operations = [];
-        operationsSnapshot.forEach(operation => {
-          let newOperation = {
-            ...operation.data(),
-            uid: operation.id
-          };
-
-          newOperation.date = newOperation.date.toDate().toLocaleDateString();
-
-          operations = [...operations, newOperation];
+    if (this.props.operations.length === 0) {
+      this.props.firebase
+        .doGetOperations(this.props.authUser.uid)
+        .then(operations => {
+          this.props.setOperations(operations);
         });
-
-        this.props.setOperations(operations);
-      });
+    }
   }
 
   render() {
