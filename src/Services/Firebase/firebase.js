@@ -47,6 +47,9 @@ class Firebase {
     date,
     isVerified
   ) => {
+    date = new Date(date);
+    date.setHours(date.getHours() + 3);
+
     return new Promise((resolve, reject) => {
       this.usersCollection
         .doc(authUserUid)
@@ -56,7 +59,7 @@ class Firebase {
           description,
           value: value,
           type,
-          date: new Date(date),
+          date: app.firestore.Timestamp.fromDate(date),
           isVerified
         })
         .then(resolve())
@@ -72,6 +75,9 @@ class Firebase {
     date,
     isVerified
   ) => {
+    date = new Date(date);
+    date.setHours(date.getHours() + 3);
+
     return new Promise((resolve, reject) => {
       this.usersCollection
         .doc(authUserUid)
@@ -80,7 +86,7 @@ class Firebase {
           description,
           value: parseFloat(value.replace(',', '.')),
           type,
-          date: new Date(date),
+          date: app.firestore.Timestamp.fromDate(date),
           isVerified
         })
         .then(resolve())
