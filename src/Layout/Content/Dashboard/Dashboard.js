@@ -24,7 +24,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { firebase, authUser, setOperations, operations } = this.props;
+    const { operations } = this.props;
 
     if (operations.length === 0) {
       this.getOperations();
