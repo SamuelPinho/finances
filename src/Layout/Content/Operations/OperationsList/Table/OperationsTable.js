@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { withAuthorization } from 'Services/Session';
+import moment from 'moment';
 import operationActions from 'Redux/Actions/operationActions';
+import { withAuthorization } from 'Services/Session';
 import Finances from 'Services/Business';
+import DateInput from './Inputs/DateInput';
 
 const INITIAL_STATE = {
-  operations: [],
-  dayAmount: 0
+  operations: []
 };
 
 const types = {
@@ -15,6 +16,25 @@ const types = {
   Recebo: 'is-success',
   Aplico: 'is-link'
 };
+
+function Tag(props) {
+  if (props.type === props.desiredType) {
+    return (
+      <span className={'tag ' + types[props.desiredType]}>
+        {props.desiredType}
+      </span>
+    );
+  } else {
+    return <span className="tag is-light">{props.desiredType}</span>;
+  }
+}
+
+var formatter = new Intl.NumberFormat('pt-br', {
+  style: 'currency',
+  currency: 'BRL',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
 
 class OperationsTable extends Component {
   constructor(props) {
@@ -34,10 +54,29 @@ class OperationsTable extends Component {
     }
   }
 
+  handleDateBlur = (event, index) => {
+    let operation = this.props.operations[index];
+
+    this.props.operations[index].date = moment(
+      event.target.value,
+      'YYYY-MM-DD'
+    ).format('DD/MM/YYYY');
+
+    this.props.firebase.doUpdateOperation(
+      this.props.authUser.uid,
+      operation.uid,
+      operation.description,
+      operation.value,
+      operation.type,
+      event.target.value,
+      operation.isVerified
+    );
+  };
+
   render() {
     return (
       <Fragment>
-        <table className="table is-hoverable is-fullwidth">
+        <table className="table is-fullwidth">
           <thead>
             <tr>
               <th>Data</th>
@@ -48,16 +87,38 @@ class OperationsTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.operations.map(operation => (
+            {this.props.operations.map((operation, index) => (
               <tr key={operation.uid}>
-                <th>{operation.date}</th>
                 <th>
-                  <span className={'tag ' + types[operation.type]}>
-                    {operation.type}
-                  </span>
+                  <DateInput
+                    date={operation.date}
+                    index={index}
+                    handleBlur={this.handleDateBlur}
+                  />
                 </th>
-                <th>{operation.value}</th>
-                <th>{operation.description}</th>
+                <th>
+                  <div className="field is-grouped is-grouped-multiline">
+                    <div className="control">
+                      <div className="tags has-addons">
+                        <Tag type={operation.type} desiredType={'Recebo'} />
+                        <Tag type={operation.type} desiredType={'Pago'} />
+                        <Tag type={operation.type} desiredType={'Aplico'} />
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                <th>
+                  <input
+                    value={formatter.format(operation.value)}
+                    className="input is-small"
+                  />
+                </th>
+                <th>
+                  <input
+                    className="input is-small"
+                    value={operation.description}
+                  />
+                </th>
                 <th>
                   <div className="field">
                     <div className="control">

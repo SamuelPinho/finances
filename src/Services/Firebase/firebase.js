@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import moment from 'moment';
 
 const config = {
   apiKey: 'AIzaSyB-K8Jat2VuRJDbEkxmowrEk7A7MGyQ180',
@@ -36,6 +37,32 @@ class Firebase {
   }
 
   // *** OPERATIONS FUNCTIONS ***
+
+  doUpdateOperation = (
+    authUserUid,
+    operationUid,
+    description,
+    value,
+    type,
+    date,
+    isVerified
+  ) => {
+    return new Promise((resolve, reject) => {
+      this.usersCollection
+        .doc(authUserUid)
+        .collection('operations')
+        .doc(operationUid)
+        .update({
+          description,
+          value: value,
+          type,
+          date: new Date(date),
+          isVerified
+        })
+        .then(resolve())
+        .catch(erro => reject(erro));
+    });
+  };
 
   doAddOperation = (
     authUserUid,
