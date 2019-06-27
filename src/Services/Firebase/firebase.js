@@ -1,7 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import moment from 'moment';
 
 const config = {
   apiKey: 'AIzaSyB-K8Jat2VuRJDbEkxmowrEk7A7MGyQ180',
@@ -38,43 +37,31 @@ class Firebase {
 
   // *** OPERATIONS FUNCTIONS ***
 
-  doUpdateOperation = (
-    authUserUid,
-    operationUid,
-    description,
-    value,
-    type,
-    date,
-    isVerified
-  ) => {
+  doUpdateOperation = (userUid, { uid, description, value, type, date, isVerified }) => {
     date = new Date(date);
     date.setHours(date.getHours() + 3);
 
     return new Promise((resolve, reject) => {
       this.usersCollection
-        .doc(authUserUid)
+        .doc(userUid)
         .collection('operations')
-        .doc(operationUid)
+        .doc(uid)
         .update({
           description,
-          value: value,
+          value,
           type,
           date: app.firestore.Timestamp.fromDate(date),
           isVerified
         })
         .then(resolve())
-        .catch(erro => reject(erro));
+        .catch(erro => {
+          console.log(erro);
+          reject(erro);
+        });
     });
   };
 
-  doAddOperation = (
-    authUserUid,
-    description,
-    value,
-    type,
-    date,
-    isVerified
-  ) => {
+  doAddOperation = (authUserUid, description, value, type, date, isVerified) => {
     date = new Date(date);
     date.setHours(date.getHours() + 3);
 
@@ -111,7 +98,7 @@ class Firebase {
               uid: operation.id
             };
 
-            newOperation.date = newOperation.date.toDate().toLocaleDateString();
+            newOperation.date = newOperation.date.toDate();
 
             operations = [...operations, newOperation];
           });
@@ -122,20 +109,12 @@ class Firebase {
     });
   };
 
-  doGetOperationsByDate = (
-    authUserUid,
-    finalDate,
-    initialDate = '30/08/2018'
-  ) => {
+  doGetOperationsByDate = (authUserUid, finalDate, initialDate = '30/08/2018') => {
     return new Promise((resolve, reject) => {
       initialDate = initialDate.split('/');
       finalDate = finalDate.split('/');
 
-      initialDate = new Date(
-        initialDate[2],
-        initialDate[1] - 1,
-        initialDate[0]
-      );
+      initialDate = new Date(initialDate[2], initialDate[1] - 1, initialDate[0]);
 
       finalDate = new Date(finalDate[2], finalDate[1] - 1, finalDate[0]);
 
@@ -195,10 +174,7 @@ class Firebase {
         })
         .then(() => {
           resolve(
-            createReturnMessage(
-              MESSAGE_TYPES.success,
-              'Você foi cadastrado com sucesso'
-            )
+            createReturnMessage(MESSAGE_TYPES.success, 'Você foi cadastrado com sucesso')
           );
         })
         .catch(erro => {

@@ -1,4 +1,8 @@
-import { SET_OPERATIONS, SEARCH_OPERATION } from '../Types/operation';
+import {
+  SET_OPERATIONS,
+  SEARCH_OPERATION,
+  EDIT_OPERATION
+} from '../Types/operation';
 
 const INITIAL_STATE = {
   operations: [],
@@ -30,6 +34,28 @@ const applySearchOperation = (state, action) => {
   };
 };
 
+const applyEditOperation = (state, action) => {
+  const updatedOperations = state.operations.map(operation => {
+    if (action.operation.uid === operation.uid) {
+      operation = { ...operation, ...action.operation };
+    }
+    return operation;
+  });
+
+  const updatedFilteredOperations = state.filteredOperations.map(operation => {
+    if (action.operation.uid === operation.uid) {
+      operation = { ...operation, ...action.operation };
+    }
+    return operation;
+  });
+
+  return {
+    ...state,
+    operations: updatedOperations,
+    filteredOperations: updatedFilteredOperations
+  };
+};
+
 function operationReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_OPERATIONS: {
@@ -37,6 +63,9 @@ function operationReducer(state = INITIAL_STATE, action) {
     }
     case SEARCH_OPERATION: {
       return applySearchOperation(state, action);
+    }
+    case EDIT_OPERATION: {
+      return applyEditOperation(state, action);
     }
     default:
       return state;

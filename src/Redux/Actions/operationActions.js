@@ -1,4 +1,8 @@
-import { SET_OPERATIONS, SEARCH_OPERATION } from 'Redux/Types/operation';
+import {
+  SET_OPERATIONS,
+  SEARCH_OPERATION,
+  EDIT_OPERATION
+} from 'Redux/Types/operation';
 
 const operationActions = {
   setOperations: operations => {
@@ -7,10 +11,16 @@ const operationActions = {
       operations
     };
   },
-  sarchOperation: text => {
+  searchOperation: text => {
     return {
       type: SEARCH_OPERATION,
       text
+    };
+  },
+  editOperation: operation => {
+    return {
+      type: EDIT_OPERATION,
+      operation
     };
   }
 };

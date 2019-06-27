@@ -26,7 +26,7 @@ class SearchBar extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  search: text => dispatch(operationActions.sarchOperation(text))
+  search: text => dispatch(operationActions.searchOperation(text))
 });
 
 export default compose(
