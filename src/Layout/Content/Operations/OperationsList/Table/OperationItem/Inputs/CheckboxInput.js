@@ -20,6 +20,7 @@ class CheckboxInput extends Component {
                 checked={operation.isVerified}
                 onChange={this.handleChange}
                 onClick={this.props.handleUpdate}
+                disabled={this.props.disabled}
               />
             </label>
           </div>

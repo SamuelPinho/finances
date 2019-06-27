@@ -1,16 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-
-const config = {
-  apiKey: 'AIzaSyB-K8Jat2VuRJDbEkxmowrEk7A7MGyQ180',
-  authDomain: 'finances-aca97.firebaseapp.com',
-  databaseURL: 'https://finances-aca97.firebaseio.com',
-  projectId: 'finances-aca97',
-  storageBucket: 'finances-aca97.appspot.com',
-  messagingSenderId: '190644548458',
-  appId: '1:190644548458:web:b5193a96235f276b'
-};
+import { config } from './firebase.config';
 
 const MESSAGE_TYPES = {
   error: 'danger',

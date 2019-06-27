@@ -10,6 +10,14 @@ import ValueInput from './Inputs/ValueInput';
 import CheckboxInput from './Inputs/CheckboxInput';
 
 class OperationItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isEditing: false
+    };
+  }
+
   handleUpdate = () => {
     this.props.firebase.doUpdateOperation(this.props.authUser.uid, this.props.operation);
   };
@@ -18,45 +26,55 @@ class OperationItem extends Component {
     this.props.editOperation(this.props.operation);
   };
 
-  handlethat = event => {
-    console.log(event.target.value);
+  handleClickToEdit = event => {
+    event.preventDefault();
+
+    const { isEditing } = this.state;
+
+    if (isEditing) {
+      this.props.editOperation(this.props.operation);
+      this.props.firebase.doUpdateOperation(this.props.authUser.uid, this.props.operation);
+    }
+
+    this.setState({
+      isEditing: !this.state.isEditing
+    });
   };
 
   render() {
     const { operation } = this.props;
+    const { isEditing } = this.state;
 
     return (
       <Fragment>
         <th>
           <DateInput
             operation={operation}
-            handleUpdate={this.handleUpdate}
-            handleChange={this.handleChange}
+            // handleUpdate={this.handleUpdate}
+            disabled={!isEditing}
           />
         </th>
         <th>
-          <div className="field is-grouped is-grouped-multiline">
-            <div className="control">
-              <Tags
-                operation={operation}
-                handleChange={this.handleChange}
-                handleUpdate={this.handleUpdate}
-              />
-            </div>
-          </div>
+          <Tags
+            operation={operation}
+            handleChange={this.handleChange}
+            handleUpdate={this.handleUpdate}
+          />
         </th>
         <th>
           <ValueInput
             operation={operation}
             handleUpdate={this.handleUpdate}
             handleChange={this.handleChange}
+            disabled={!isEditing}
           />
         </th>
         <th>
           <DescriptionInput
             operation={operation}
-            handleUpdate={this.handleUpdate}
-            handleChange={this.handleChange}
+            // handleUpdate={this.handleUpdate}
+            // handleChange={this.handleChange}
+            disabled={!isEditing}
           />
         </th>
         <th>
@@ -64,7 +82,18 @@ class OperationItem extends Component {
             operation={operation}
             handleUpdate={this.handleUpdate}
             handleChange={this.handleChange}
+            disabled={!isEditing}
           />
+        </th>
+        <th>
+          <button
+            className={
+              'button is-small ' + (isEditing ? 'is-success' : 'is-outlined is-dark')
+            }
+            onClick={this.handleClickToEdit}
+          >
+            {isEditing ? 'Salvar' : 'Editar'}
+          </button>
         </th>
       </Fragment>
     );

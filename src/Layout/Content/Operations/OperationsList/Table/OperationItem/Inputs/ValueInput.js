@@ -26,6 +26,7 @@ class ValueInput extends Component {
           value={formatter.format(operation.value)}
           onChange={this.handleChange}
           onBlur={this.props.handleUpdate}
+          disabled={this.props.disabled}
         />
       </Fragment>
     );

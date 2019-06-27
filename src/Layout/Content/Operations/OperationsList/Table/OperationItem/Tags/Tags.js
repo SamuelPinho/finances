@@ -14,10 +14,26 @@ class Tags extends Component {
 
     return (
       <Fragment>
-        <div className="tags has-addons">
-          <Tag operationType={type} defaultType={'Recebo'} handleClick={this.handleClick} />
-          <Tag operationType={type} defaultType={'Pago'} handleClick={this.handleClick} />
-          <Tag operationType={type} defaultType={'Aplico'} handleClick={this.handleClick} />
+        <div className="field is-grouped is-grouped-multiline">
+          <div className="control">
+            <div className="tags has-addons">
+              <Tag
+                operationType={type}
+                defaultType={'Recebo'}
+                handleClick={this.handleClick}
+              />
+              <Tag
+                operationType={type}
+                defaultType={'Pago'}
+                handleClick={this.handleClick}
+              />
+              <Tag
+                operationType={type}
+                defaultType={'Aplico'}
+                handleClick={this.handleClick}
+              />
+            </div>
+          </div>
         </div>
       </Fragment>
     );

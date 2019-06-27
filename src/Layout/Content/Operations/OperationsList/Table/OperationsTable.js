@@ -8,11 +8,9 @@ import OperationItem from './OperationItem/OperationItem';
 class OperationsTable extends Component {
   componentDidMount() {
     if (this.props.operations.length === 0) {
-      this.props.firebase
-        .doGetOperations(this.props.authUser.uid)
-        .then(operations => {
-          this.props.setOperations(operations);
-        });
+      this.props.firebase.doGetOperations(this.props.authUser.uid).then(operations => {
+        this.props.setOperations(operations);
+      });
     }
   }
 
@@ -27,6 +25,7 @@ class OperationsTable extends Component {
               <th>Valor</th>
               <th>Descrição</th>
               <th>Verificado</th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -43,10 +42,8 @@ class OperationsTable extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setOperations: operations =>
-    dispatch(operationActions.setOperations(operations)),
-  editOperation: operation =>
-    dispatch(operationActions.editOperation(operation))
+  setOperations: operations => dispatch(operationActions.setOperations(operations)),
+  editOperation: operation => dispatch(operationActions.editOperation(operation))
 });
 
 const mapStateToProps = state => ({
