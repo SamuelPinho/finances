@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Firebase, { FirebaseContext } from 'Services/Firebase';
 import './styles/theme.scss';
 import Layout from './Layout/Layout';
+require('dotenv').config();
 
 class App extends Component {
   render() {

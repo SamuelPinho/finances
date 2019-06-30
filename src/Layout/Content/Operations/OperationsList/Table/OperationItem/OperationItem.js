@@ -14,7 +14,8 @@ class OperationItem extends Component {
     super(props);
 
     this.state = {
-      isEditing: false
+      isEditing: false,
+      operation: this.props.operation
     };
   }
 
@@ -22,18 +23,21 @@ class OperationItem extends Component {
     this.props.firebase.doUpdateOperation(this.props.authUser.uid, this.props.operation);
   };
 
-  handleChange = () => {
-    this.props.editOperation(this.props.operation);
+  handleChange = operation => {
+    this.setState({
+      operation
+    });
+    // this.props.editOperation(this.props.operation);
   };
 
   handleClickToEdit = event => {
     event.preventDefault();
 
-    const { isEditing } = this.state;
+    const { isEditing, operation } = this.state;
 
     if (isEditing) {
-      this.props.editOperation(this.props.operation);
-      this.props.firebase.doUpdateOperation(this.props.authUser.uid, this.props.operation);
+      this.props.editOperation(operation);
+      this.props.firebase.doUpdateOperation(this.props.authUser.uid, operation);
     }
 
     this.setState({
@@ -42,7 +46,7 @@ class OperationItem extends Component {
   };
 
   render() {
-    const { operation } = this.props;
+    const { operation } = this.state;
     const { isEditing } = this.state;
 
     return (
@@ -64,7 +68,6 @@ class OperationItem extends Component {
         <th>
           <ValueInput
             operation={operation}
-            handleUpdate={this.handleUpdate}
             handleChange={this.handleChange}
             disabled={!isEditing}
           />
@@ -72,8 +75,7 @@ class OperationItem extends Component {
         <th>
           <DescriptionInput
             operation={operation}
-            // handleUpdate={this.handleUpdate}
-            // handleChange={this.handleChange}
+            handleChange={this.handleChange}
             disabled={!isEditing}
           />
         </th>

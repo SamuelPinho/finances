@@ -6,7 +6,7 @@ class DescriptionInput extends Component {
 
     this.props.operation.description = event.target.value;
 
-    // this.props.handleChange();
+    this.props.handleChange(this.props.operation);
   };
 
   render() {
@@ -17,7 +17,6 @@ class DescriptionInput extends Component {
           type="text"
           value={this.props.operation.description}
           onChange={this.handleChange}
-          // onBlur={this.props.handleUpdate}
           disabled={this.props.disabled}
         />
       </Fragment>

@@ -5,7 +5,7 @@ class Tags extends Component {
   handleClick = type => {
     this.props.operation.type = type;
 
-    this.props.handleChange();
+    this.props.handleChange(this.props.operation);
     this.props.handleUpdate();
   };
 
