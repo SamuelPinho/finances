@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Financês
 
-## Available Scripts
+An web app where you can control your financial life.
 
-In the project directory, you can run:
+## Motivation
 
-### `npm start`
+I was trying to have a better control over my finances and to do that I created a google sheet.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+But why not create an app to do that instead?
+So this is it :)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+1. Install the npm packages through `npm install`.
+2. To connect the app to your firebase console, you need to add the enviroment variables above to your `.env` file.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+REACT_APP_API_KEY=''
+REACT_APP_AUTH_DOMAIN=''
+REACT_APP_DATABASE_URL=''
+REACT_APP_PROJECT_ID=''
+REACT_APP_STORAGE_BUCKET=''
+REACT_APP_MESSAGING_SENDER_ID=''
+REACT_APP_APP_ID=''
+```
 
-### `npm run build`
+_The image above shows where you can get your firebase values on your firebase console_
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Firebase Configuration File](./assets/firebase-config-example.png)
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+3. With that you're now Ok to run the development server with the command `npm run start`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+You should have an firebase app registered and know how to use google firestore.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [Firebase Tutorial](https://firebase.google.com/docs/web/setup?authuser=0)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Firestore Tutorial](https://firebase.google.com/docs/firestore?authuser=0)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Built With
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- React and Redux
+- Firebase Firestore and Authentication
+- [Bulma Css Framework](http://bulma.io)
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+MIT © [Samuel Monteiro](https://samuelmonteiro.netlify.com/)
