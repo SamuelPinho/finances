@@ -22,4 +22,5 @@ class App extends Component {
   }
 }
 
+document.title = 'Financês';
 render(<App />, document.getElementById('root'));
