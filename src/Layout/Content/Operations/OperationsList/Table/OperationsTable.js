@@ -20,11 +20,11 @@ class OperationsTable extends Component {
         <table className="table is-fullwidth">
           <thead>
             <tr>
-              <th>Data</th>
-              <th>Tipo</th>
-              <th>Valor</th>
-              <th>Descrição</th>
-              <th>Verificado</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Value</th>
+              <th>Description</th>
+              <th>Is Verified?</th>
               <th />
             </tr>
           </thead>

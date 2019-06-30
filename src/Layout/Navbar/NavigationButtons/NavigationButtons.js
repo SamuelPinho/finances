@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-// const LOCATIONS = {
-//   '/':
-// }
+import { withAuthorization } from 'Services/Session';
 
 class NavigationButtons extends Component {
   render() {
@@ -16,8 +14,7 @@ class NavigationButtons extends Component {
           <div className="control">
             <Link
               className={
-                'button is-light is-rounded ' +
-                (pathname === '/' ? '' : 'is-outlined')
+                'button is-light is-rounded ' + (pathname === '/' ? '' : 'is-outlined')
               }
               to="/"
             >
@@ -30,9 +27,9 @@ class NavigationButtons extends Component {
                 'button is-light is-rounded ' +
                 (pathname === '/operacoes' ? '' : 'is-outlined')
               }
-              to="/operacoes"
+              to="/operations"
             >
-              Operações
+              Operations
             </Link>
           </div>
           <div className="control">
@@ -52,4 +49,7 @@ class NavigationButtons extends Component {
   }
 }
 
-export default withRouter(NavigationButtons);
+export default compose(
+  withAuthorization(),
+  withRouter
+)(NavigationButtons);

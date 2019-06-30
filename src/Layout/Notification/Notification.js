@@ -24,8 +24,7 @@ class Notification extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  removeNotification: index =>
-    dispatch(notificationActions.removeNotification(index))
+  removeNotification: index => dispatch(notificationActions.removeNotification(index))
 });
 
 export default connect(

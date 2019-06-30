@@ -7,11 +7,8 @@ class AddNewOperationButton extends Component {
       <Fragment>
         <div className="field">
           <div className="control">
-            <Link
-              to="/operacoes/adicionar"
-              className="button is-link is-outlined is-rounded"
-            >
-              Adicionar Operação
+            <Link to="/operations/add" className="button is-link is-outlined is-rounded">
+              Add Operation
             </Link>
           </div>
         </div>

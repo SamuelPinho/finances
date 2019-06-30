@@ -16,7 +16,7 @@ class SearchBar extends Component {
         <div className="control" style={{ width: '25rem' }}>
           <input
             className="input"
-            placeholder="Buscar por uma operação"
+            placeholder="Search for an operation"
             onChange={this.handleChange}
           />
         </div>

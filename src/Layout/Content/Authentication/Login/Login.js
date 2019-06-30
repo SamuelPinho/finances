@@ -37,7 +37,7 @@ class Cadastro extends Component {
         });
 
         this.props.addNotification({
-          message: 'Você se logou com sucesso!',
+          message: "You're now logged in",
           type: 'success'
         });
 
@@ -45,7 +45,7 @@ class Cadastro extends Component {
       })
       .catch(erro => {
         if (erro.code === 'auth/wrong-password') {
-          erro.message = 'O e-mail ou a senha digitados estão incorretos.';
+          erro.message = 'The email or the password are wrong.';
         }
 
         this.props.addNotification({
@@ -79,7 +79,7 @@ class Cadastro extends Component {
             </div>
           </div>
           <div className="field">
-            <label className="label">Senha</label>
+            <label className="label">Password</label>
             <div className="control">
               <input
                 className="input column is-5"

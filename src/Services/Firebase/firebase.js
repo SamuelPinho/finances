@@ -165,7 +165,10 @@ class Firebase {
         })
         .then(() => {
           resolve(
-            createReturnMessage(MESSAGE_TYPES.success, 'Você foi cadastrado com sucesso')
+            createReturnMessage(
+              MESSAGE_TYPES.success,
+              "You've been registered with success"
+            )
           );
         })
         .catch(erro => {
@@ -174,7 +177,7 @@ class Firebase {
           reject(
             createReturnMessage(
               MESSAGE_TYPES.error,
-              'Algo deu errado ao tentar cadastrar o usuário'
+              'Something went wrong while trying to register you :('
             )
           );
         });
@@ -197,7 +200,7 @@ class Firebase {
           resolve(
             createReturnMessage(
               MESSAGE_TYPES.success,
-              'Seu usuário foi atualizado com sucesso'
+              'Your information was updated with success'
             )
           );
         })
@@ -207,7 +210,7 @@ class Firebase {
           reject(
             createReturnMessage(
               MESSAGE_TYPES.error,
-              'Algo deu errado ao tentar atualizar seus dados'
+              'Something went wrong while updating your info'
             )
           );
         });

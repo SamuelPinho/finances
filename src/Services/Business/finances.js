@@ -12,19 +12,19 @@ class Finances {
 
     operations.forEach(operation => {
       console.log(typeof operation.value);
-      if (operation.type === 'Recebo') {
+      if (operation.type === 'Receive') {
         dayAmount += operation.value;
 
         receive.amount += operation.value;
         receive.times += 1;
       }
-      if (operation.type === 'Pago') {
+      if (operation.type === 'Pay') {
         dayAmount -= operation.value;
 
         pay.amount += operation.value;
         pay.times += 1;
       }
-      if (operation.type === 'Aplico') {
+      if (operation.type === 'Apply') {
         dayAmount -= operation.value;
 
         apply.amount += operation.value;
@@ -45,8 +45,6 @@ class Finances {
   };
 
   doMean = (totalAmount, times) => {
-    console.log(totalAmount);
-    console.log(times);
     return totalAmount / times;
   };
 }

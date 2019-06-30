@@ -9,7 +9,7 @@ import { notificationActions } from 'Redux/Actions';
 const INITIAL_STATE = {
   descricao: '',
   valor: '',
-  tipo: 'Pago',
+  tipo: 'Pay',
   data: '',
   isVerificado: false
 };
@@ -44,13 +44,13 @@ class OperationForm extends Component {
         this.setState({ ...INITIAL_STATE });
 
         this.props.addNotification({
-          message: 'Operação cadastrada com sucesso',
+          message: 'Operation added with success',
           type: 'success'
         });
       })
       .catch(erro => {
         this.props.addNotification({
-          message: 'Algo deu errado ao tentar cadastrar a operação',
+          message: 'Something went wrong',
           type: 'danger'
         });
       });
@@ -62,7 +62,7 @@ class OperationForm extends Component {
     return (
       <Fragment>
         <div className="field">
-          <label className="label">Descrição da Operação</label>
+          <label className="label">Operation Description</label>
           <div className="control">
             <input
               className="input"
@@ -73,7 +73,7 @@ class OperationForm extends Component {
           </div>
         </div>
 
-        <label className="label">Valor em R$</label>
+        <label className="label">Value in R$</label>
         <div className="field has-addons">
           <p className="control">
             <input
@@ -88,16 +88,16 @@ class OperationForm extends Component {
           <p className="control">
             <span className="select">
               <select name="tipo" onChange={this.handleChange} value={tipo}>
-                <option value="Pago">Pago</option>
-                <option value="Recebo">Recebo</option>
-                <option value="Aplico">Aplico</option>
+                <option value="Pago">Pay</option>
+                <option value="Recebo">Receive</option>
+                <option value="Aplico">Apply</option>
               </select>
             </span>
           </p>
         </div>
 
         <div className="field">
-          <label className="label">Data que irá ocorrer</label>
+          <label className="label">Date that will occur</label>
           <div className="control">
             <input
               className="input "
@@ -118,7 +118,7 @@ class OperationForm extends Component {
                 checked={isVerificado}
                 onChange={this.handleCheckChange}
               />
-              Verificado
+              Verified
             </label>
           </div>
         </div>
@@ -126,12 +126,12 @@ class OperationForm extends Component {
         <div className="field is-grouped">
           <div className="control">
             <button className="button is-link" onClick={this.handleClick}>
-              Adicionar
+              Add
             </button>
           </div>
           <div className="control">
             <Link className="button is-text" to="/operacoes">
-              Voltar
+              Go Back
             </Link>
           </div>
         </div>
@@ -147,7 +147,7 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   withAuthorization(),
-  withPageTitle('Adicionar Operação'),
+  withPageTitle('Add Operation'),
   connect(
     null,
     mapDispatchToProps

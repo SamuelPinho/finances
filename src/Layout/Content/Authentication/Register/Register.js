@@ -60,7 +60,7 @@ class Register extends Component {
       <Fragment>
         <form onSubmit={this.handleSubmit}>
           <div className="field">
-            <label className="label">Primeiro Nome</label>
+            <label className="label">First Name</label>
             <div className="control">
               <input
                 className="input column is-5"
@@ -84,7 +84,7 @@ class Register extends Component {
             </div>
           </div>
           <div className="field">
-            <label className="label">Senha</label>
+            <label className="label">Password</label>
             <div className="control">
               <input
                 className="input column is-5"
@@ -98,12 +98,8 @@ class Register extends Component {
           </div>
           <div className="field">
             <div className="control">
-              <button
-                className="button is-success"
-                disabled={isDisabled}
-                type="submit"
-              >
-                Cadastre-se
+              <button className="button is-success" disabled={isDisabled} type="submit">
+                Register
               </button>
             </div>
             <p className="help is-success">{sucesso}</p>
@@ -121,7 +117,7 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   withFirebase,
-  withPageTitle('Cadastrar-se'),
+  withPageTitle('Register'),
   connect(
     null,
     mapDispatchToProps

@@ -19,17 +19,17 @@ class Tags extends Component {
             <div className="tags has-addons">
               <Tag
                 operationType={type}
-                defaultType={'Recebo'}
+                defaultType={'Receive'}
                 handleClick={this.handleClick}
               />
               <Tag
                 operationType={type}
-                defaultType={'Pago'}
+                defaultType={'Pay'}
                 handleClick={this.handleClick}
               />
               <Tag
                 operationType={type}
-                defaultType={'Aplico'}
+                defaultType={'Apply'}
                 handleClick={this.handleClick}
               />
             </div>

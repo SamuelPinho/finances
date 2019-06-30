@@ -11,7 +11,7 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <p>Bem vindo ao site</p>
+        <p>Welcome!</p>
       </Fragment>
     );
   }

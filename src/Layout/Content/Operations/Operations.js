@@ -11,8 +11,8 @@ class Operations extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route path="/operacoes/adicionar" component={OperationForm} />
-          <Route exact path="/operacoes" component={OperationsList} />
+          <Route path="/operations/add" component={OperationForm} />
+          <Route exact path="/operations" component={OperationsList} />
         </Switch>
       </Fragment>
     );
@@ -20,6 +20,6 @@ class Operations extends Component {
 }
 
 export default compose(
-  withPageTitle('Operações'),
+  withPageTitle('Operations'),
   withAuthorization()
 )(Operations);

@@ -48,7 +48,7 @@ class FinancialInformation extends Component {
     return (
       <Fragment>
         <div className="field">
-          <label className="label">Valor do Capital Inicial</label>
+          <label className="label">Initial Value</label>
           <div className="control">
             <input
               className="input column is-4"
@@ -62,7 +62,7 @@ class FinancialInformation extends Component {
         <div className="field">
           <div className="control">
             <button className="button is-success" onClick={this.handleSubmit}>
-              Salvar
+              Save
             </button>
           </div>
         </div>

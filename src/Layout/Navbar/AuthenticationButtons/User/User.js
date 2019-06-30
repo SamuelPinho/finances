@@ -13,16 +13,16 @@ class User extends Component {
               aria-haspopup="true"
               aria-controls="dropdown-menu"
             >
-              <span>Samuel Monteiro</span>
+              <span>{this.props.authUser.profileInformation.firstName}</span>
             </button>
           </div>
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content">
-              <Link className="dropdown-item" to="/usuario">
-                Meu Perfil
+              <Link className="dropdown-item" to="/user">
+                My Profile
               </Link>
-              <Link className="dropdown-item" to="/usuario/financeiro">
-                Dados Financeiros
+              <Link className="dropdown-item" to="/user/financial">
+                Financial Data
               </Link>
               <hr className="dropdown-divider" />
               <LogoutButton />

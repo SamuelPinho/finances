@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 
 const types = {
-  Pago: 'is-danger',
-  Recebo: 'is-success',
-  Aplico: 'is-link'
+  Pay: 'is-danger',
+  Receive: 'is-success',
+  Apply: 'is-link'
 };
 
 class Tag extends Component {

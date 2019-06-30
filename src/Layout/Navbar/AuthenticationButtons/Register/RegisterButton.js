@@ -6,11 +6,8 @@ class RegisterButton extends Component {
     return (
       <Fragment>
         <div className="control">
-          <Link
-            to="/cadastro"
-            className="button is-light is-inverted is-rounded"
-          >
-            Cadastre-se
+          <Link to="/register" className="button is-light is-inverted is-rounded">
+            Register
           </Link>
         </div>
       </Fragment>

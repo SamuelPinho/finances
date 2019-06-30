@@ -7,7 +7,7 @@ import User from './User/User';
 function Buttons(props) {
   const authUser = props.authUser;
   if (authUser) {
-    return <User />;
+    return <User authUser={authUser} />;
   } else {
     return (
       <Fragment>

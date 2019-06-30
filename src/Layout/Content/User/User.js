@@ -12,8 +12,8 @@ class User extends Component {
       <Fragment>
         <Tabs />
         <Switch>
-          <Route path="/usuario" exact component={ProfileInformation} />
-          <Route path="/usuario/financeiro" component={FinancialInformation} />
+          <Route path="/user" exact component={ProfileInformation} />
+          <Route path="/user/financial" component={FinancialInformation} />
         </Switch>
       </Fragment>
     );

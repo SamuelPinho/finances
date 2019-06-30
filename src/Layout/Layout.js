@@ -12,11 +12,7 @@ class Layout extends Component {
           <div className="hero-body">
             <div className="container">
               {this.props.notifications.map((notification, key) => (
-                <Notification
-                  index={key}
-                  notification={notification}
-                  key={key}
-                />
+                <Notification index={key} notification={notification} key={key} />
               ))}
               <div className="columns is-centered">
                 <div className="column is-four-fifths">

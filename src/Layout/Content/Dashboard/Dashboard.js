@@ -42,12 +42,10 @@ class Dashboard extends Component {
   getOperations = () => {
     const { firebase, authUser, setOperations } = this.props;
 
-    firebase
-      .doGetOperationsByDate(authUser.uid, this.state.date)
-      .then(operations => {
-        setOperations(operations);
-        this.CalculateDayAmount();
-      });
+    firebase.doGetOperationsByDate(authUser.uid, this.state.date).then(operations => {
+      setOperations(operations);
+      this.CalculateDayAmount();
+    });
   };
 
   CalculateDayAmount = () => {
@@ -77,7 +75,7 @@ class Dashboard extends Component {
       <Fragment>
         <div className="field is-horizontal">
           <div className="field-label is-medium">
-            <label className="label">Data para Análise</label>
+            <label className="label">Date for analysis</label>
           </div>
           <div className="field-body">
             <div className="field has-addons">
@@ -95,7 +93,7 @@ class Dashboard extends Component {
                   type="submit"
                   onClick={this.handleGetOperations}
                 >
-                  Buscar
+                  Search
                 </button>
               </div>
             </div>
@@ -105,25 +103,25 @@ class Dashboard extends Component {
         <nav className="level has-text-dark">
           <div className="level-item has-text-centered">
             <div>
-              <p className="heading is-size-5">Saldo Final</p>
+              <p className="heading is-size-5">Balance</p>
               <p className="title is-size-2">R$ {this.state.todayAmount}</p>
             </div>
           </div>
           <div className="level-item has-text-centered has-text-danger">
             <div>
-              <p className="heading is-size-5">Paguei</p>
+              <p className="heading is-size-5">Mean Spent</p>
               <p className="title is-size-2">R$ {this.state.payAmount}</p>
             </div>
           </div>
           <div className="level-item has-text-centered has-text-success">
             <div>
-              <p className="heading is-size-5">Recebi</p>
+              <p className="heading is-size-5">Mean Received</p>
               <p className="title is-size-2">R$ {this.state.receiveAmount}</p>
             </div>
           </div>
           <div className="level-item has-text-centered has-text-link">
             <div>
-              <p className="heading is-size-5">Apliquei</p>
+              <p className="heading is-size-5">Mean Applied</p>
               <p className="title is-size-2">R$ {this.state.applyAmount}</p>
             </div>
           </div>
@@ -138,8 +136,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setOperations: operations =>
-    dispatch(operationActions.setOperations(operations))
+  setOperations: operations => dispatch(operationActions.setOperations(operations))
 });
 
 export default compose(

@@ -94,7 +94,7 @@ class OperationItem extends Component {
             }
             onClick={this.handleClickToEdit}
           >
-            {isEditing ? 'Salvar' : 'Editar'}
+            {isEditing ? 'Save' : 'Edit'}
           </button>
         </th>
       </Fragment>

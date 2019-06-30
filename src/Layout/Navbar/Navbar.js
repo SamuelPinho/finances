@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { withAuthorization } from 'Services/Session';
 import AuthenticationButtons from './AuthenticationButtons/AuthenticationButtons';
 import NavigationButtons from './NavigationButtons/NavigationButtons';
 
@@ -20,4 +19,4 @@ class Navbar extends Component {
   }
 }
 
-export default withAuthorization()(Navbar);
+export default Navbar;

@@ -17,9 +17,9 @@ class Content extends Component {
           <Title />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/operacoes" component={Operations} />
-            <Route path="/cadastro/pergunta" component={Questions} />
-            <Route path="/usuario" component={User} />
+            <Route path="/operations" component={Operations} />
+            <Route path="/register/question" component={Questions} />
+            <Route path="/user" component={User} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/" component={Authentication} />
           </Switch>

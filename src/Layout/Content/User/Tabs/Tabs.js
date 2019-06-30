@@ -17,11 +17,11 @@ class Tabs extends Component {
       <Fragment>
         <div className="tabs is-size-5">
           <ul>
-            <li className={IsActive(this.props, '/usuario')}>
-              <Link to="/usuario">Dados Gerais</Link>
+            <li className={IsActive(this.props, '/user')}>
+              <Link to="/user">General Data</Link>
             </li>
-            <li className={IsActive(this.props, '/usuario/financeiro')}>
-              <Link to="/usuario/financeiro">Dados Financeiros</Link>
+            <li className={IsActive(this.props, '/user/financial')}>
+              <Link to="/user/financial">Financial Data</Link>
             </li>
           </ul>
         </div>
