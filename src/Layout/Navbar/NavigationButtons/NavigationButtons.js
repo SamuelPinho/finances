@@ -25,7 +25,7 @@ class NavigationButtons extends Component {
             <Link
               className={
                 'button is-light is-rounded ' +
-                (pathname === '/operacoes' ? '' : 'is-outlined')
+                (pathname === '/operations' ? '' : 'is-outlined')
               }
               to="/operations"
             >
